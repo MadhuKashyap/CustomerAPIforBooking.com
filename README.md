@@ -38,86 +38,86 @@ mvn test
 ```
 ### Curl Tests
 
-The notes API lives at the route ```/api/notes```. If your application is running on localhost:8080, you would access the API via http://localhost:8080/api/notes.
-```json
-{
- "id" : 1,
- "body" : "Ask Larry about the TPS reports."
-}
-```
+The hotels API lives at the route ```/api/hotels```. If your application is running on localhost:8080, you would access the API via http://localhost:8080/api/hotels.
+
 To create a new note, post a JSON payload to the API endpoint as modeled below:
 ```curl
-POST /api/notes
+POST /api/hotels
 BODY a note
 ```
-Returns: a saved note...
+Returns: a saved hotel...
 Example
 ```curl
-curl -i -H "Content-Type: application/json" -X POST -d '{"body" : "Pick up milk!"}' http://localhost:8080/api/notes
+curl -i -H "Content-Type: application/json" -X POST -d '{"name" : "Blue Residency", "lat" : 12, "lon" : 13}' http://localhost:8080/api/hotels
 ```
 Returns:
-```json
-{
- "id" : 2,
- "body" : "Pick up milk!"
-}
+```1
 ```
+
+Which is the number of affected rows
 Get a note using an API call:
 ```
-GET /api/notes/{id}
+GET /api/hotels/{id}
 ```
-Returns: the requested note..
+Returns: the requested hotel of given id..
 Example:
 ```curl
-curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/notes/1
+curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/hotels/1
 ```
 Returns:
 ```json
 {
  "id" : 1,
- "body" : "Ask Larry about the TPS reports."
+ "name" : "Blue Residency",
+ "lat" : 12,
+ "lon" : 13
 }
 ```
-I can get all notes using an API call:
+I can get all hotels using an API call:
 ```
-GET /api/notes
+GET /api/hotels
 ```
-Returns: A list of my notes
+Returns: A list of hotels in db
 
 Example:
 
 ```
-curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/notes
+curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/hotels
 ```
 Returns:
 ```json
 [
  {
  "id" : 2,
- "body" : "Pick up milk!"
+ "name" : "Sapphire",
+ "lat" : 18,
+ "lon" : 19
  },
  {
  "id" : 1,
- "body" : "Ask Larry about the TPS reports."
+ "name" : "Blue Residency",
+ "lat" : 12,
+ "lon" : 13
  }
 ]
 ```
-To search notes by their bodies, use the 'query' parameter in the GET request
+You can also serach hotels with their names using regex
+To search hotels by their names, use the 'query' parameter in the GET request
 Example:
 ```curl
-curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/notes?query=milk
+curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/hotels?query=Sapph
 ```
-Returns a list of every note with the word 'milk' in it.
+Returns a list of every hotel with the word 'Sapph' in it.
 
-To delete an individual note use the endpoint ```/api/notes/delete``` with a parameter of 'id' signifying the note you wish to remove.
+To delete an individual note use the endpoint ```/api/hotels/``` with a parameter of 'id' signifying the note you wish to remove.
 ```curl
-POST /api/notes/delete
+DELETE /api/notes
 ID int value of id to delete
 ```
-Returns: the updated list of notes...
+Returns: the number of affected rows
 Example
 ```curl
-curl -i -H "Content-Type: application/json" -X POST  http://localhost:8080/api/notes/delete?id=1
+curl -i -H "Content-Type: application/json" -X POST  http://localhost:8080/api/hotels/delete/1
 ```
 
 ## Built With
