@@ -1,4 +1,4 @@
-INSERT INTO notes
-    (body)
+INSERT INTO HOTEL
+    (name, lat, lon)
 VALUES
-    ('Ask Larry about the TPS reports');
+    ('hello', 12, 13);
