@@ -111,7 +111,7 @@ Returns a list of every hotel with the word 'Sapph' in it.
 
 To delete an individual note use the endpoint ```/api/hotels/``` with a parameter of 'id' signifying the note you wish to remove.
 ```curl
-DELETE /api/notes
+DELETE /api/hotels
 ID int value of id to delete
 ```
 Returns: the number of affected rows
